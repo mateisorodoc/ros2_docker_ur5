@@ -1,0 +1,1 @@
+Invoking command in '/ros2_ws/ros2_docker_ur5/build/robotiq_controllers': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /ros2_ws/ros2_docker_ur5/src/ros2_robotiq_gripper/robotiq_controllers -DCMAKE_INSTALL_PREFIX=/ros2_ws/ros2_docker_ur5/install/robotiq_controllers

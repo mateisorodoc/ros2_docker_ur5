@@ -4,6 +4,7 @@
    <xacro:arg name="name" default="ur"/>
    <!-- import main macro -->
    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+   <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_85_macro.urdf.xacro" />
 
    <!-- possible 'ur_type' values: ur3, ur5, ur10, ur3e, ur5e, ur7e, ur10e, ur12e, ur16e, ur8long, ur15, ur18, ur20, ur30 -->
    <!-- the default value should raise an error in case this was called without defining the type -->
@@ -126,6 +127,57 @@
      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
    </xacro:ur_robot>
 
+   <xacro:robotiq_gripper name="RobotiqGripper" prefix="" parent="tool0" include_ros2_control="false">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+</xacro:robotiq_gripper>
+
+<ros2_control name="RobotiqGripperSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <joint name="robotiq_85_left_knuckle_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="robotiq_85_right_knuckle_joint">
+            <param name="mimic">robotiq_85_left_knuckle_joint</param>
+            <param name="multiplier">1</param>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="robotiq_85_left_inner_knuckle_joint">
+            <param name="mimic">robotiq_85_left_knuckle_joint</param>
+            <param name="multiplier">1</param>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="robotiq_85_right_inner_knuckle_joint">
+            <param name="mimic">robotiq_85_left_knuckle_joint</param>
+            <param name="multiplier">1</param>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="robotiq_85_left_finger_tip_joint">
+            <param name="mimic">robotiq_85_left_knuckle_joint</param>
+            <param name="multiplier">-1</param>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="robotiq_85_right_finger_tip_joint">
+            <param name="mimic">robotiq_85_left_knuckle_joint</param>
+            <param name="multiplier">-1</param>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
    <xacro:if value="$(arg sim_gazebo)">
     <!-- Gazebo plugins -->
     <gazebo reference="world">
@@ -148,5 +200,4 @@
       </plugin>
     </gazebo>
   </xacro:if>
-
 </robot>

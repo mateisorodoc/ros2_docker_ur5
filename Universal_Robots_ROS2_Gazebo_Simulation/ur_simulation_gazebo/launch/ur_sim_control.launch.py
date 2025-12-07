@@ -45,6 +45,12 @@ from launch_ros.substitutions import FindPackageShare
 
 def launch_setup(context, *args, **kwargs):
 
+    robotiq_gripper_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["robotiq_gripper_controller", "-c", "/controller_manager"],
+    )
+
     # Initialize Arguments
     ur_type = LaunchConfiguration("ur_type")
     safety_limits = LaunchConfiguration("safety_limits")
@@ -184,6 +190,7 @@ def launch_setup(context, *args, **kwargs):
         initial_joint_controller_spawner_started,
         gazebo,
         gazebo_spawn_robot,
+        robotiq_gripper_controller_spawner,  # <--- Add this line
     ]
 
     return nodes_to_start

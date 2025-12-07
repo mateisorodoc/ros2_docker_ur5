@@ -1,0 +1,2 @@
+Invoking command in '/ros2_ws/ros2_docker_ur5/build/ur_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /ros2_ws/ros2_docker_ur5/build/ur_description -- -j12 -l12
+Invoked command in '/ros2_ws/ros2_docker_ur5/build/ur_description' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /ros2_ws/ros2_docker_ur5/build/ur_description -- -j12 -l12
